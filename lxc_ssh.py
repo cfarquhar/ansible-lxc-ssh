@@ -526,7 +526,7 @@ class Connection(ConnectionBase):
         #print( vm )
         #raise "blah"
         h = self.container_name
-        lxc_cmd = 'lxc-attach --name %s -- /bin/sh -c %s'  \
+        lxc_cmd = 'sudo lxc-attach --name %s -- /bin/sh -c %s'  \
                 % (pipes.quote(h),
                    pipes.quote(cmd))
         if in_data:
@@ -549,7 +549,7 @@ class Connection(ConnectionBase):
             in_data = in_f.read()
             cmd = ('cat > %s; echo -n done' % pipes.quote(out_path))
             h = self.container_name
-            lxc_cmd = 'lxc-attach --name %s -- /bin/sh -c %s'  \
+            lxc_cmd = 'sudo lxc-attach --name %s -- /bin/sh -c %s'  \
                     % (pipes.quote(h),
                        pipes.quote(cmd))
             if in_data:
@@ -566,7 +566,7 @@ class Connection(ConnectionBase):
         super(Connection, self).fetch_file(in_path, out_path)
         cmd = ('cat %s' % pipes.quote(in_path))
         h = self.container_name
-        lxc_cmd = 'lxc-attach --name %s -- /bin/sh -c %s'  \
+        lxc_cmd = 'sudo lxc-attach --name %s -- /bin/sh -c %s'  \
                 % (pipes.quote(h),
                    pipes.quote(cmd))
         in_data = None
